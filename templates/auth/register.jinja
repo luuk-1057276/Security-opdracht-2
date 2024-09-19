@@ -1,0 +1,79 @@
+{% extends 'base.jinja' %}
+{% block head %}
+
+{% endblock %}
+{% block title %} Register {% endblock %}
+
+{% block body %}
+    <div class="container">
+        <br/>
+        <br/>
+        <br/>
+        <br/>
+        <div class="row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4">
+                <h2 class="title">Register pagina</h2>
+                {% with messages = get_flashed_messages() %}
+                    {% for message in messages %}
+                        <p class="alert alert-success">{{ message }}</p>
+                    {% endfor %}
+                {% endwith %}
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="firstname" class="form-label">Voornaam</label>
+                        <input type="text" class="form-control" id="firstname" name="firstname">
+                    </div>
+                    <div class="mb-3">
+                        <label for="infix" class="form-label">Tussenvoegsel</label>
+                        <input type="text" class="form-control" id="infix" name="infix">
+                    </div>
+                    <div class="mb-3">
+                        <label for="lastname" class="form-label">Achternaam</label>
+                        <input type="text" class="form-control" id="lastname" name="lastname">
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Wachtwoord</label>
+                        <input type="password" class="form-control" id="password" name="password">
+                    </div>
+                    <div class="mb-3">
+                        <label for="zipcode" class="form-label">Postcode</label>
+                        <input type="text" class="form-control" id="zipcode" name="zipcode">
+                    </div>
+                    <div class="mb-3">
+                        <label for="gender" class="form-label">Gender<br>
+                            <select class="btn btn-info" id="gender" name="gender">
+                                <option class="dropdown-item" value="">Select Gender</option>
+                                <option class="dropdown-item" value="1">Male</option>
+                                <option class="dropdown-item" value="0">Female</option>
+                            </select>
+                        </label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="mail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="mail" name="mail">
+                    </div>
+                    <div class="mb-3">
+                        <label for="phonenumber" class="form-label">Telefoon nummer</label>
+                        <input type="text" class="form-control" id="phonenumber" name="phonenumber">
+                    </div>
+                    <div class="mb-3">
+                        <label for="birthday" class="form-label">geboorte Datum</label>
+                        <input type="date" class="form-control" id="birthday" name="birthday">
+                    </div>
+                    <input type="button" class="btn btn-info" onclick="loadHTML()" id="toggleButton"
+                           value="Show/Hide Info">
+                    <br><br>
+                    <div id="hiddenInfo" style="display: none;">
+                        <div class="mb-3">
+                            <label for="guardian" class="form-label">guardian</label>
+                            <input type="text" class="form-control" id="guardian" name="guardian">
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary rounded-pill">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

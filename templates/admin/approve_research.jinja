@@ -1,0 +1,78 @@
+{% extends "base.jinja" %} {% block title %}onderzoeken keuren{% endblock %} {%
+block body %}
+
+<h1>onderzoeken keuren</h1>
+
+<ul class="admin_quick_link">
+  <a href="/admin/approve_research_requests"
+    >{{ research_signup_request_count[0] }} ervaringsdeskundigen willen zich
+    inschrijven voor een onderzoek</a
+  >
+  <a href="/admin/list_of_researches">alle onderzoeken</a>
+</ul>
+
+<div class="filter_research_block">
+  <h2 class="filter_research">onderzoeken filteren</h2>
+
+  <p>
+    titel onderzoek
+    <input
+      type="text"
+      name="title"
+      placeholder="titel"
+      id="searchApproveTitle"
+    />
+  </p>
+  <p>
+    naam organisatie
+    <input
+      type="text"
+      name="organisation"
+      placeholder="organisatie"
+      id="searchApproveOrganisation"
+    />
+  </p>
+  <button class="clear_search_field" id="clearSearchFields">
+    zoekvelden leegmaken
+  </button>
+</div>
+
+<ul class="approve_research_cards" id="approveResearchList">
+  {% for research in researches_to_approve %}
+  <li
+    data-title="{{ research.title }}"
+    data-organisation="{{ research.organisation }}"
+  >
+    <p>
+      {{ research.title }}
+    </p>
+    <p>{{ research.organisation }}</p>
+    <p>{{ research.type }}</p>
+    <p>
+      beschikbaar <br />
+      van {{ research.available_from }} <br />
+      tot
+      {{ research.available_until }}
+    </p>
+    <p>geschikt voor: {{ research.target }}</p>
+    <p>soort: {{ research.type }} <br /></p>
+    <p class="approve_research_description">
+      {{ research.description }}
+    </p>
+    <form
+      action="/admin/approve_research"
+      method="POST"
+      class="approve_research_buttons"
+    >
+      <button name="approved_research" value="{{ research.id }}" type="submit">
+        ✓ goedkeuren
+      </button>
+      <button name="rejected_research" value="{{ research.id }}" type="submit">
+        X afkeuren
+      </button>
+    </form>
+  </li>
+
+  {% endfor %}
+</ul>
+{% endblock %}

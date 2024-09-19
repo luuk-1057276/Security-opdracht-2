@@ -1,0 +1,660 @@
+.body {
+    background-color: #D9EBF7;
+}
+
+p, input, select, button, nav {
+    font-weight: 600;
+    font-size: 1.5rem;
+    font-family: Sans-serif;
+}
+
+h1 {
+    font-weight: 600;
+    font-size: 1.8rem;
+    font-family: Sans-serif;
+    text-align: center;
+    position: fixed;
+    top: 0%;
+    left: 50%;
+    transform: translate(-50%);
+    max-width: 25%;
+    margin: auto;
+    z-index: 2;
+}
+
+.nav_box a {
+    display: inline-block;
+    padding: 25px 0px;
+    min-width: 100%;
+    flex-wrap: wrap;
+    text-decoration: none;
+    color: white; 
+}
+
+.nav_box a:hover{
+    background-color: #080e2a;
+}
+
+.nav_box {
+    font-weight: 600;
+    font-size: 1.4rem;
+    font-family: Sans-serif;
+    position: fixed;
+    left: -30%;
+    top: 0%;
+    width: 25%;
+    height: 100%;
+    overflow: hidden;
+    /*background: linear-gradient(90deg, rgba(78,149,242,1) 20%, rgba(47,81,234,1) 100%);*/
+    background-color: #111e55;
+    padding: 20px;
+    max-width: 450px;
+    padding-top: 5%;
+    z-index: 5;
+    transition: left;
+}
+
+.open_navbar {
+    position: fixed;
+    top: -5px;
+    width: 5rem;
+    filter: invert(100%) grayscale(100%);
+    cursor: pointer;
+    z-index: 7;
+    opacity: 1;
+    transform: linear 0.1s;
+}
+
+.collapse_navbar {
+    position: fixed;
+    top: 2%;
+    width: 3rem;
+    left: 2%;
+    filter: brightness(0) invert(1);
+    z-index: 6;
+    opacity: 0;
+    transform: linear 0.1s;
+}
+
+footer * {
+    font-weight: 600;
+    font-size: 1.8rem;
+    font-family: Sans-serif;
+    color: #111e55;
+    display: inline-block;
+    padding: 15px;
+    z-index: 100;
+}
+
+footer{
+    z-index: 99;
+    height: 10%;
+}
+
+.logo {
+    background: rgb(47,81,234);
+    background: linear-gradient(129deg, rgba(47,81,234,1) 30rem, rgba(217,235,247,1) 31.5rem); 
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    padding-left: 100px;
+    width: 100%;
+    z-index: 1;
+}
+
+.logo_in_nav {
+    position: absolute;
+    top: 0%;
+    right: 5%;
+    width: 300px;
+}
+
+footer{
+    position: fixed;
+    bottom: 0;
+    left: 0px;
+    background-color: white;
+    width: 100%;
+}
+
+.filter_research {
+    text-align:center;
+}
+
+.filter_research_block {
+    border-left: 5px solid #111e55;
+    color: white;
+    /*background: linear-gradient(90deg, rgba(78,149,242,1) 20%, rgba(47,81,234,1) 100%);*/
+    background-color: #111e55;
+    position:fixed;
+    right: 0%;
+    padding: 10px;
+    top: 0%;
+    height: 100%;
+    width: 25%;
+    z-index: 2;
+}
+
+.filter_research_block * {
+    position: relative;
+    top: 7%;
+}
+
+.filter_research_block p{
+    text-align:right;
+    white-space: nowrap;
+}
+
+.filter_research_block input select{
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid black;
+    padding: 5px;
+    max-width: 45%;
+    margin-top: 4%;
+}
+
+.search_button {
+    position: fixed;
+    top: 73%;
+}
+
+
+.research_cards {
+    position: relative;
+    list-style-type: none;
+    width: 80%;
+    margin: auto;
+    right: 10%;
+    margin-top: 2%;
+    margin-bottom: 10%;
+}
+
+.research_cards li {
+    width: 20%;
+    height: 330px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    margin: 10px;
+    vertical-align: top;
+    display: inline-block;
+    transition: .1s linear;
+}
+
+.research_details_admin {
+    position: absolute;
+    display: flex;
+    bottom: 2%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    text-align: center;
+    border-top: 5px black solid;
+}
+
+.research_details_admin select {
+    position: relative;
+    bottom: 50%;
+    left: 1%;
+    height: 40px;
+    border-radius: 5px;
+    border: 1px solid black;
+    background-color: white;
+}
+
+.remove_research_icon {
+    position: relative;
+    top: 16px;
+    width: 40px;
+    height: 40px;
+    cursor:pointer;
+}
+
+
+
+
+.dashboard_cards {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    width: 60%;
+    padding: 0;
+    list-style: none;
+    top: 15%;
+    display: flex;
+}
+
+
+
+.dashboard_cards li{
+    width: 50%;
+    min-height: 100px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    margin: 10px;
+    transition: .1s linear;
+    text-align: center;
+}
+.dashboard_cards p,a {
+    font-weight: 600;
+    font-size: 1.4rem;
+    font-family: Sans-serif;
+    margin: 5px;
+    text-decoration: none;
+}   
+
+.research_cards li:hover {
+    box-shadow: rgb(0,0,0) 0px 20px 50px 0px;
+    transition: .1s linear;
+    cursor: pointer;
+}
+
+.research_cards .card-title {
+    font-weight: 600;
+    font-size: 1.4rem;
+    font-family: Sans-serif;
+    color: rgba(47,81,234,1)
+}
+
+.research_cards .card-text {
+    color: #111e55;
+}
+
+.research_cards p {
+    overflow-wrap: break-word;
+}
+
+.research_details {
+    position: fixed;
+    opacity: 0;
+    top: 5%;
+    bottom: 15%;
+    left: 25%;
+    right: 25%;
+    background-color: white;
+    border-radius: 15px;
+    z-index: -10;
+    font-size: 5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #111e55;
+}
+
+.research_details.open {
+    opacity: 1;
+    z-index: 100;
+    transition: .1s linear;
+}
+
+
+.close_research_button {
+    position: absolute;
+    top: 2%;
+    right: 1%;
+}
+
+.details_title {
+    position: absolute;
+    top: 5%;
+    text-align: center;
+    font-weight: 600;
+    font-size: 2rem;
+    font-family: Sans-serif;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    border-bottom: black solid 5px;
+}
+
+.details_organisation {
+    position: absolute;
+    top: 15%;
+    left: 5%;
+    max-width: 25%;
+}
+
+.details_type {
+    position: absolute;
+    top: 35%;
+    left: 5%;
+    max-width: 35%;
+}
+
+.details_description {
+    position: absolute;
+    top: 30%;
+    max-width: 45%;
+    right: 5%;
+    max-height: 50%;
+    overflow: scroll;
+}
+
+.description_head {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    font-size: .3em;
+}
+
+.details_available_date {
+    position: absolute;
+    top: 50%;
+    left: 5%;
+    max-width: 30%;
+}
+.sign_in_research {
+    position: absolute;
+    bottom: 15%;
+    left: 50%;
+    transform: translate(-50%);
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    border-top: 5px black solid;
+
+}
+
+.sign_in_research_button {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 5%);
+    padding: 2%;
+    margin-left: auto;
+    margin-right: auto;
+    font-size: 0.4em;
+    border: none;
+    color: white;
+    background-color: #111e55;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.confirm_sign_out {
+    position: absolute;
+    right: 50%;
+    transform: translate(50%, -60%);
+    font-weight: 600;
+    font-size: 1.5rem;
+    font-family: Sans-serif;
+    z-index: -10;
+    opacity: 0;
+    background: linear-gradient(90deg, rgba(255,255,255,1) 100%, rgba(219,219,219,1) 0%);
+    border-radius: 5%;
+    width: fit-content;
+    padding: 40px;
+    border: solid black 2px;
+}
+
+.confirm_sign_out ul button {
+    left: 50%;
+    transform: translate(50%);
+    margin: 5%;
+    font-size: 1.4em;
+    border: none;
+    color: white;
+    background-color: #111e55;
+    cursor: pointer;
+    padding: 15px;
+}
+
+.confirm_sign_out.open {
+    z-index: 101;
+    opacity: 1;
+    transition: .1s linear;
+}
+
+.admin_quick_link {
+    position: absolute;
+    left: -3%;
+    top: 10%;
+    display: flex;
+    width: 100%;
+}
+
+.admin_quick_link a {
+    text-decoration: none;
+    width: 25%;
+    color: #111e55;
+    padding: 10px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    background-color: white;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    transition: linear .1s;
+    margin-left: 3%;
+}
+
+.admin_quick_link a:hover {
+    box-shadow: rgb(0,0,0) 0px 20px 50px 0px;
+    transition: linear .1s;
+}
+
+.list_position {
+    position: relative;
+    top: 150px;
+
+}
+
+.approve_research_cards {
+    position: absolute;
+    top: 25%;
+    left: -1%;
+    list-style-type: none;
+    overflow: hidden;
+}
+
+.approve_research_cards li {
+    position: relative;
+    width: 950px;
+    height: 400px;
+    background-color: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    margin: 50px;
+    transition: .1s linear;
+
+
+}
+.approve_research_cards li:last-child {
+margin-bottom: 150px;
+}
+
+.approve_research_description {
+    position: relative;
+    bottom: 95%;
+    left: 30%;
+    width: 65%;
+    height: 11em;
+    overflow: scroll;
+    background-color: rgb(229, 229, 229);
+    border-radius: 10px;
+    border: 15px rgb(229, 229, 229) solid;
+}
+
+.approve_research_buttons {
+    position: relative;
+    bottom: 95%;
+    left: 45%;
+    display: flex;
+    width: 45%;
+    height: 20%;
+    border-radius: 5px;
+    align-items: center;
+}
+
+.approve_research_buttons button {
+    position: relative;
+    height: 60px;
+    font-size: 1.4em;
+    background-color: green;
+    border: none;
+    margin-left: 10px;
+}
+
+.approve_research_buttons button:nth-child(2) {
+    background-color: red;
+}
+
+.approve_research_buttons button:hover {
+    box-shadow: rgb(0,0,0) 0px 5px 20px 0px;
+    transition: .1s linear;
+    cursor: pointer;
+}
+
+.clear_search_field {
+    position: relative;
+    left: 50%;
+    top: 12%;
+    transform: translate(-50%);
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: white;
+    cursor: pointer;
+}
+
+.clear_search_field:hover {
+    background-color: rgb(226, 226, 226);
+}
+
+.clear_search_field:active {
+    background-color: rgb(173, 173, 173);
+}
+
+.admin_quick_link a {
+    font-weight: 600;
+    font-size: 1.2rem;
+    font-family: Sans-serif;
+}
+.approve_research_signup_request_list {
+    position: absolute;
+    top: 25%;
+    left: 2.5%;
+    max-width: 70%;
+    list-style-type: none;
+    overflow: hidden;
+}
+.approve_research_signup_request_list .card {
+    height: 300px;
+    min-width: 350px;
+}
+.approve_research_signup_request_list .col-4 {
+    padding: 10px;
+}
+
+.approve_research_signup_request_list .row:last-child {
+    margin-bottom: 100px;
+}
+
+.research_and_user_details {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    transform: translate(-50%);
+}
+
+.research_and_user_details .card {
+
+    height: 110%;
+}
+
+.research_and_user_details p {
+    font-weight: 600;
+    font-size: 1.4rem;
+    font-family: Sans-serif;
+    padding-left: 2%;
+}
+
+.approve_research_signup_buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20%;
+}
+
+.approve_research_signup_buttons button {
+    position: relative;
+    top: 30%;
+    font-size: 2em;
+    margin: 0.5% 1%;
+}
+
+.return {
+position: absolute;
+top: -3.5%;
+left: -10%;
+z-index: 1;
+font-size: 2em;
+cursor: pointer;
+background-color: white;
+height: 0px;
+color: black;
+text-decoration: none;
+}
+
+.return img {
+    position: relative;
+    left: 25%;
+    transform: rotate(180deg);
+    scale: 0.2;
+}
+
+.research_list {
+    position: absolute;
+    top: 20%;
+    left: 2.5%;
+    list-style-type: none;
+    overflow: hidden;
+}
+
+.research_list .col-4 .col-3 {
+    padding: 10px;
+}
+
+.research_list .col-4:last-child {
+    margin-bottom: 400px;
+}
+
+.research_list .card{
+    min-height: 550px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    
+}
+
+.research_list_buttons {
+    position: absolute;
+    display: flex;
+    width: 70%;
+    left: 16%;
+    bottom: 5%;
+    margin: auto;
+    scale: 1.4;
+}
+
+.research_list_buttons button {
+    margin-right: 5%;
+}
+
+.delete_research_buttons {
+    display: flex;
+    scale: 1.4;
+    justify-content: center;
+}
+
+.delete_research {
+    border: solid red 5px;
+    border-radius: 10px;
+    padding: 5%;
+}
+
+.list_normal {
+    width: 70%;
+}

@@ -1,0 +1,73 @@
+{% extends "base.jinja" %}
+{% block head %} {% endblock %}
+{% block title %}gebruikerslijst{% endblock %}
+{% block body %}
+    <h1>Gebruikers lijst</h1>
+
+    <div class="container">
+        <div class="row">
+            {% for user in users %}
+                <div class="col-4">
+                    <div class="card padding-bottom">
+                        <div class="card-header">
+                            <h5 class="card-title">{{ user.mail }}</h5>
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">Naam: {{ user.firstname }}
+                                {% if user.infix is not none %}
+                                    {{ user.infix }}
+                                {% endif %}
+                                {{ user.lastname }}</p>
+                            {% if user.is_admin == True %}
+                                <p class="card-text">Rol: Beheerder</p>
+                            {% else %}
+                                <p class="card-text">Rol: Gebruiker</p>
+                            {% endif %}
+                            {# adres moet hier ook nog komen (moet ook nog in de database#}
+                            {# test dit met screen reader#}
+                            <p class="card-text">Postcode: {{ user.zipcode }}</p>
+                            {% if user.gender == 0 %}
+                            <p class="card-text">Gender: Man</p>
+                            {% else %}
+                            <p class="card-text">Gender: Vrouw</p>
+                            {% endif %}
+                            <p class="card-text">Telefoon nummer: {{ user.phonenumber }}</p>
+                            <p class="card-text">Geboortedatum: {{ user.birthday }}</p>
+                            <a class="btn btn-info" href="edit_user/{{ user.id }}">Edit</a>
+                            <a class="btn btn-danger" href="delete_user/{{ user.id }}">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+
+    {#    <div class="filter_research_block">#}
+    {#        <h2 class="filter_research">gebruikers filteren</h2>#}
+    {##}
+    {#        <label for="searchUserType">Type gebruiker</label>#}
+    {#        <select id="searchUserType">#}
+    {#            <option value="">alle gebruikers</option>#}
+    {#            <option value="false">alleen ervaringsdeskundigen</option>#}
+    {#            <option value="true">alleen admins</option>#}
+    {#        </select>#}
+    {##}
+    {#        <label for="searchFirstName">Voornaam</label>#}
+    {#        <input type="text" placeholder="voornaam" id="searchFirstName"/>#}
+    {##}
+    {#        <label for="searchLastName">Achternaam</label>#}
+    {#        <input type="text" placeholder="achternaam" id="searchLastName"/>#}
+    {##}
+    {#        <label for="searchPhoneNumber">Telefoonnummer</label>#}
+    {#        <input type="text" placeholder="telefoonnummer" id="searchPhoneNumber"/>#}
+    {##}
+    {#        <label for="searchEmail">E-mail</label>#}
+    {#        <input type="text" placeholder="email" id="searchEmail"/>#}
+    {##}
+    {#        <button class="clear_search_field" id="clearSearchFields">#}
+    {#            Zoekvelden leegmaken#}
+    {#        </button>#}
+    {#    </div>#}
+
+{% endblock %}

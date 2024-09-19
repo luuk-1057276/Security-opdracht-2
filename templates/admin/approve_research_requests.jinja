@@ -1,0 +1,46 @@
+{% extends "base.jinja" %} {% block title %}onderzoek aanvragen goedkeuren{%
+endblock %} {% block body %}
+<h1>onderzoek aanvragen goedkeuren</h1>
+<ul class="admin_quick_link">
+  <a href="/admin/list_of_researches">alle onderzoeken</a>
+  <a href="/admin/approve_research"
+    >0 onderzoeken zijn ingediend door organisaties</a
+  >
+</ul>
+<div class="filter_research_block">
+  <h2 class="filter_research">aanvragen filteren</h2>
+  <p>
+    gebruiker
+    <input type="text" name="user" placeholder="naam" id="searchUser" />
+  </p>
+  <p>
+    onderzoek
+    <input
+      type="text"
+      name="research"
+      placeholder="titel"
+      id="searchResearch"
+    />
+  </p>
+  <p>
+    status
+    <select name="status" id="searchStatus">
+      <option value="">alle statussen</option>
+      <option value="in afwachting" selected>in afwachting</option>
+      <option value="goedgekeurd">goedgekeurd</option>
+      <option value="afgekeurd">afgekeurd</option>
+    </select>
+  </p>
+  <button class="clear_search_field" id="clearSearchFields">
+    zoekvelden leegmaken
+  </button>
+</div>
+
+<div class="approve_research_signup_request_list">
+  <div class="container">
+    <div class="row" id="approveResearchRequestList">
+      <p style="font-size: 5em">aan het laden...</p>
+    </div>
+  </div>
+</div>
+{% endblock %}

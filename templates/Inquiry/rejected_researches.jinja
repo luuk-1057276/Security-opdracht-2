@@ -1,0 +1,79 @@
+{% extends "base.jinja" %} {% block title %}afgewezen onderzoeken{% endblock %}
+{% block body %}
+
+<div class="container research_list">
+  <div class="row" id="researchList">
+    {%for research in researches%}
+    <div class="col-4" data-status="{{ research.status }}">
+      <div class="card padding-bottom">
+        <div class="card-header">
+          <h5 class="card-title">{{ research.title }}</h5>
+        </div>
+        <div class="card-body">
+          <p class="card-text">{{ research.status }}</p>
+          {%if research.firstname is not none%}
+          <p class="card-text">
+            {{ research.firstname }} {{ research.infix }}
+            {{ research.lastname }}
+          </p>
+          {% endif %} {%if research.name is not none%}
+          <p class="card-text">{{ research.name }}</p>
+          {% endif %} {%if research.name is none%}
+          <p class="card-text">geen organisatie.</p>
+          {% endif %}
+
+          <p class="card-text">
+            {{ research.research_type }} <br />{{ research.location }}
+          </p>
+
+          <p class="card-text">
+            beschikbaar van {{ research.date_from }} tot
+            {{ research.date_to }}
+          </p>
+
+          <div class="extra_details" data-id="{{ research.id }}">
+            <p>beschrijving: <br />{{ research.description }}</p>
+            {% if research.with_price %}
+            <p>{{ research.with_price }}</p>
+            <p>{{ research.price }}</p>
+            {% endif %}
+            <p>
+              voor {{ research.target_age_from }} jarige tot
+              {{ research.target_age_to }} jarige
+            </p>
+          </div>
+          <br />
+          <br />
+          <br />
+          <div class="research_list_buttons">
+            <button
+              class="btn btn-info more_details_button"
+              data-id="{{ research.id }}"
+            >
+              meer details
+            </button>
+            <button
+              class="btn btn-info less_details_button"
+              data-id="{{ research.id }}"
+            >
+              minder details
+            </button>
+            <form action="/inquiry/rejected_researches" method="post">
+              <button
+                value="{{ research.id }}"
+                class="btn btn-danger"
+                name="reset_research_user"
+              >
+                verwijder
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {%endfor%}
+  </div>
+</div>
+
+{% endblock %}

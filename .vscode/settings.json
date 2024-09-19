@@ -1,0 +1,11 @@
+{
+    "sqltools.useNodeRuntime": true,
+    "sqltools.connections": [
+        {
+            "previewLimit": 50,
+            "driver": "SQLite",
+            "name": "wp3",
+            "database": "${workspaceFolder:wp3-2024-rest-1a2-rotzooiblyat}/database/wp3.db"
+        }
+    ]
+}

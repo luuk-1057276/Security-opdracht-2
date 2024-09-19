@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      crossorigin="anonymous"
+    />
+    <link rel="stylesheet" href="/static/stylesheet.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% block head %}{% endblock %}
+    <title>{% block title %}{% endblock %}</title>
+  </head>
+  <body class="body">
+    <div class="logo">
+      <img
+        src="/static/images/accessibility_logo.png"
+        alt="logo"
+        width="300px"
+      />
+    </div>
+    <img
+      src="/static/images/options_2647907.png"
+      alt="open navigatebalk"
+      class="open_navbar"
+      id="openNavbar"
+    />
+    <img
+      src="/static/images/arrow-8-256.png"
+      alt="open navigatebalk"
+      class="collapse_navbar"
+      id="collapseNavbar"
+    />
+    <nav class="nav_box" id="navBar">
+      <img
+        src="/static/images/accessibility_logo.png"
+        alt="logo"
+        class="logo_in_nav"
+      />
+      {% if session|length >= 1 %}
+      <a href="/logout">
+        <img src="/static/images/arrow-8-24.png" alt="" /> Uitloggen
+      </a>
+      {% endif %} {% if session['is_admin'] == True %}
+      <a href="/admin">
+        <img src="/static/images/arrow-8-24.png" alt="" /> dashboard
+      </a>
+      <br />
+
+      <a href="/admin/register_requests">
+        <img src="/static/images/arrow-8-24.png" alt="" /> Registratie aanvragen
+      </a>
+      <br />
+
+      <a href="/admin/list_of_users">
+        <img src="/static/images/arrow-8-24.png" alt="" /> Lijst van gebruikers
+      </a>
+      <br />
+
+      <a href="/admin/list_of_researches">
+        <img src="/static/images/arrow-8-24.png" alt="" /> Lijst van onderzoeken
+      </a>
+      <br />
+
+      <a href="/admin/approve_research_requests">
+        <img src="/static/images/arrow-8-24.png" alt="" />
+        Onderzoeksregistraties
+      </a>
+      <br />
+
+      <a href="/admin/approve_research">
+        <img src="/static/images/arrow-8-24.png" alt="" /> Onderzoeken keuren
+      </a>
+      <br />
+      {% elif session['is_admin'] == False %}
+
+      <a href="/my_account">
+        <img src="/static/images/arrow-8-24.png" alt="" /> Account beheren
+      </a>
+      <br />
+
+      <a href="/inquiry/research_list">
+        <img src="/static/images/arrow-8-24.png" alt="" /> Inschrijven voor
+        onderzoeken
+      </a>
+      <br />
+
+      <a href="/inquiry/my_registered_researches">
+        <img src="/static/images/arrow-8-24.png" alt="" /> Mijn ingeschreven
+        onderzoeken
+      </a>
+      <br />
+
+      <a href="/inquiry/rejected_researches">
+        <img src="/static/images/arrow-8-24.png" alt="" /> Afgewezen onderzoeken
+      </a>
+      <br />
+
+      {% elif session|length == 0 %}
+      <a href="/login">
+        <img src="/static/images/arrow-8-24.png" alt="" /> Inloggen
+      </a>
+      <br />
+      <a href="/register">
+        <img src="/static/images/arrow-8-24.png" alt="" /> Registreren
+      </a>
+      {% endif %}
+    </nav>
+    <br />
+    <br />
+    <br />
+    <br />
+    {% block body %}{% endblock %}
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+
+    <footer>
+      <p>© 2024 Stichting Accessibility</p>
+      <a href="https://www.accessibility.nl/disclaimer"> Disclaimer</a>
+      <a href="https://www.accessibility.nl/cookies"> Cookies</a>
+      <a href="https://www.accessibility.nl/privacy-policy"> privacy policy</a>
+      <a href="https://www.accessibility.nl/sitemap"> sitemap</a>
+      <a href="https://www.accessibility.nl/toegankelijkheidsverklaring"
+        >Toegankelijkheidsverklaring</a
+      >
+    </footer>
+
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
+
+    <script src="/static/main.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

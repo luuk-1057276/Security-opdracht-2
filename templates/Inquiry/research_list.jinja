@@ -1,0 +1,98 @@
+{% extends "/base.jinja" %} {% block title %}lijst van onderzoeken{% endblock %}
+{% block body %}
+<h1>inschrijven voor onderzoeken</h1>
+<div class="filter_research_block">
+  <h2 class="filter_research">onderzoeken filteren</h2>
+  <p>titel <input type="text" id="searchTitle" /></p>
+  <p>naam organisatie <input type="text" id="searchOrganisation" /></p>
+  <p>
+    type onderzoek
+    <select id="searchType">
+      <option value="">alle type</option>
+      <option value="op locatie">op locatie</option>
+      <option value="via telefoon">via telefoon</option>
+      <option value="videobellen">videobellen</option>
+    </select>
+  </p>
+  <p>
+    datum beschikbaar <br />
+    <input type="date" id="searchDate" />
+  </p>
+
+  <button class="clear_search_field" id="clearSearchFields">
+    zoekvelden leegmaken
+  </button>
+</div>
+
+<div class="container research_list list_normal">
+  <div class="row" id="researchList">
+    {%for research in researches%}
+    <div
+      class="col-4"
+      data-title="{{ research.title }}"
+      data-organisation="{{ research.name }}"
+      data-type="{{ research.research_type }}"
+      data-available-from="{{ research.date_from }}"
+      data-available-until="{{ research.date_to }}"
+    >
+      <div class="card padding-bottom">
+        <div class="card-header">
+          <h5 class="card-title">{{ research.title }}</h5>
+        </div>
+        <div class="card-body">
+          <p class="card-text">{{ research.name }}</p>
+          <p class="card-text">
+            {{ research.research_type }} <br />{{ research.location }}
+          </p>
+
+          <p class="card-text">
+            beschikbaar van {{ research.date_from }} tot
+            {{ research.date_to }}
+          </p>
+
+          <div class="extra_details" data-id="{{ research.id }}">
+            <p>beschrijving: <br />{{ research.description }}</p>
+            {% if research.with_price %}
+            <p>{{ research.with_price }}</p>
+            <p>{{ research.price }}</p>
+            {% endif %}
+            <p>
+              voor {{ research.target_age_from }} jarige tot
+              {{ research.target_age_to }} jarige
+            </p>
+          </div>
+          <br />
+          <br />
+          <br />
+          <br />
+          <div class="research_list_buttons">
+            <button
+              class="btn btn-info more_details_button"
+              data-id="{{ research.id }}"
+            >
+              meer details
+            </button>
+            <button
+              class="btn btn-info less_details_button"
+              data-id="{{ research.id }}"
+            >
+              minder details
+            </button>
+            <form action="/inquiry/research_list" method="post">
+              <button
+                name="research_sign_up"
+                value="{{ research.id }}"
+                type="submit"
+                class="btn btn-success"
+              >
+                inschrijven
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    {%endfor%}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,88 @@
+{% extends "base.jinja" %} {% block title %}keur onderzoek aanmelding{% endblock
+%} {% block body %}
+<h1>onderzoek aanmelding goedkeuren</h1>
+
+<a href="/admin/approve_research_requests" class="return"
+  ><img src="/static/images/arrow-8-256.png" alt="" /> terug</a
+>
+
+<div class="container research_and_user_details">
+  <div class="row">
+    {%for data in research_signup_request%}
+
+    <div class="col-6">
+      <div class="card padding-bottom">
+        <div class="card-header">
+          <h5 class="card-title">
+            {{ data.firstname }}
+            {%if data.infix is not none%}
+            {{ data.infix }}
+            {% endif %}
+            {{ data.lastname }}
+          </h5>
+        </div>
+        <p>mail: {{ data.mail }}</p>
+        <p>telefoonnummer: {{ data.phonenumber }}</p>
+        <p>{{ data.gender }}</p>
+        <p>adres: {{ data.zipcode }}</p>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="card padding-bottom">
+        <div class="card-header">
+          <h5 class="card-title">{{ data.title }} | {{ data.status }}</h5>
+        </div>
+        <p>beschrijving: <br />{{ data.description }}</p>
+        <p>organisatie: {{ data.name }}</p>
+        <p>beschikbaar van {{ data.date_from }} tot{{ data.date_to }}</p>
+        <p>
+          type onderzoek: {{ data.research_type }} <br />
+          {{ data.location }}
+        </p>
+        <p>
+          bedoeld voor {{ data.target_age_from }} jarige tot en met
+          {{ data.target_age_to }} jarige
+        </p>
+      </div>
+    </div>
+    <form
+      action="/admin/approve_research_requests/{{ data.id }}"
+      method="post"
+      class="approve_research_signup_buttons"
+    >
+      {% if data.status != "goedgekeurd" %}
+      <button
+        name="change_status"
+        type="submit"
+        value="goedgekeurd"
+        class="btn btn-success"
+      >
+        goedkeuren
+      </button>
+      {% endif %} {% if data.status != "afgekeurd" %}
+      <button
+        name="change_status"
+        type="submit"
+        value="afgekeurd"
+        class="btn btn-danger"
+      >
+        afkeuren
+      </button>
+
+      {% endif %} {% if data.status != "in afwachting" %}
+      <button
+        name="change_status"
+        type="submit"
+        value="in afwachting"
+        class="btn btn-warning"
+      >
+        status verwijderen
+      </button>
+
+      {% endif %}
+    </form>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock %}

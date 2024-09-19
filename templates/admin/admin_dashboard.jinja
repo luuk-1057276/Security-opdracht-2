@@ -1,0 +1,47 @@
+{% extends "base.jinja" %} {% block title %}admin dashboard{% endblock %} {%
+block body %}
+<h1>dashboard</h1>
+
+<ul class="dashboard_cards">
+  <li>
+    <p>gebruikers</p>
+    <br />
+    <br />
+    <p id="userCount">{{ user_count[0] }} aan het laden...</p>
+    <a href="/admin/list_of_users">gebruikers beheren</a>
+    <br />
+    <br />
+    <br />
+    <p>0 registratie verzoeken</p>
+    <a href="/admin/register_requests"> naar registratieverzoeken</a>
+  </li>
+
+  <li>
+    <p>onderzoeken</p>
+    <br />
+    <br />
+    <p id="researchCount">{{ research_count[0] }} aan het laden...</p>
+    <a href="/admin/list_of_researches">onderzoeken beheren</a>
+    <br />
+    <br />
+    <br />
+    <p id="researchSignupRequestCount">
+      {{ research_signup_request_count[0] }} aan het laden...
+    </p>
+    <a href="/admin/approve_research_requests"> naar onderzoeksregistraties</a>
+  </li>
+  <li>
+    <p>organisaties</p>
+    <br />
+    <br />
+    <a href="">contactpersonen</a>
+    <br />
+    <br />
+    <br />
+    <br />
+    <p>0 onderzoeksaanvragen</p>
+    <a href="/admin/approve_research"> naar onderzoeksaanvragen</a>
+  </li>
+</ul>
+
+{% endblock %}
