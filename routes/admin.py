@@ -1,7 +1,19 @@
 from flask import Flask, render_template, request, Blueprint, session, redirect, flash, jsonify
 from models.model import *
 
+from flask_limiter import Limiter
+from flask_limiter.util import get_remote_address
+
 app = Flask(__name__)
+
+limiter = Limiter(
+    key_func=get_remote_address,
+    app=app,
+
+    #een gebruiker kan standaard maximaal 200 requests per dag doen en 50 requests per uur
+    default_limits=["200 per day", "50 per hour"]
+)
+
 admin = Blueprint('admin', __name__)
 
 researches_to_approve = [
@@ -53,11 +65,14 @@ user_count = get_user_count()
 
 #routes voor ajax
 @admin.route("/update_dashboard", methods=["GET", "POST"])
+@limiter.limit("20 per minute")
 def update_dashboard():
     research_count = get_research_count()
     user_count = get_user_count()
     research_signup_request_count = get_research_signup_requests_count()
-    return jsonify({'research_count': research_count[0], 'user_count': user_count[0], 'research_signup_request_count': research_signup_request_count[0]})
+    return jsonify({'research_count': research_count[0],
+                     'user_count': user_count[0],
+                       'research_signup_request_count': research_signup_request_count[0]})
 
 @admin.route("/update_approve_research_requests", methods=["GET", "POST"])
 def update_approve_research_requests():

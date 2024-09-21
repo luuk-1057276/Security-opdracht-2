@@ -1,18 +1,23 @@
 let navBarOpen = false;
 
-$(document).ready(function() {
+$(document).ready(function () {
+
+    //const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
 
     function updateAdminDashboard() {
         $.ajax({
             url: "/admin/update_dashboard",
             type: "GET",
-            success: function(data) {
+            headers: {
+                "X-CSRFToken": csrfToken //csfr token die aan flask wordt meegegeven om te controleren of de request van de juiste website komt
+            },
+            success: function (data) {
                 $("#researchCount").text(data.research_count + " onderzoeken");
                 $("#researchSignupRequestCount").text(data.research_signup_request_count + " aanvragen");
                 $("#userCount").text(data.user_count + " gebruikers");
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 console.error("Error updating dashboard");
                 console.log(xhr, status, error);
             }
@@ -31,9 +36,9 @@ $(document).ready(function() {
         $.ajax({
             url: "/admin/update_approve_research_requests",
             type: "GET",
-            success: function(data) {
+            success: function (data) {
                 $("#approveResearchRequestList").empty();
-                data.research_signup_requests.forEach(function(data) {
+                data.research_signup_requests.forEach(function (data) {
                     $("#approveResearchRequestList").append(`
                         <div class="col-4" data-user="${data.firstname} ${data.infix} ${data.lastname}" data-research="${data.title}" data-status="${data.status}">
                             <div class="card padding-bottom">
@@ -56,11 +61,11 @@ $(document).ready(function() {
                     //dat de filter functie niet breekt
                     updateCardHeaderColor();
                     filterApproveResearchRequestList()
-    
+
                 });
-                
+
             },
-            error: function(xhr, status, error) {
+            error: function (xhr, status, error) {
                 console.error("Error updating approve research requests");
                 console.log(xhr, status, error);
             }
@@ -80,31 +85,31 @@ $(document).ready(function() {
         filterApproveResearchRequestList();
     };
 
-    
+
     $(".extra_details").hide();
     $(".less_details_button").hide();
     $(".more_details_button").show();
     $(".delete_research").hide();
 
-    $(".more_details_button").click(function() {
+    $(".more_details_button").click(function () {
         $(".extra_details[data-id='" + $(this).data("id") + "']").show();
         $(".less_details_button[data-id='" + $(this).data("id") + "']").show();
         $(".more_details_button[data-id='" + $(this).data("id") + "']").hide();
     });
 
-    $(".less_details_button").click(function() {
+    $(".less_details_button").click(function () {
         $(".extra_details[data-id='" + $(this).data("id") + "']").hide();
         $(".less_details_button[data-id='" + $(this).data("id") + "']").hide();
         $(".more_details_button[data-id='" + $(this).data("id") + "']").show();
     });
 
 
-    $(".deleteResearchButton").click(function() {
+    $(".deleteResearchButton").click(function () {
         $(".delete_research[data-id='" + $(this).data("id") + "']").show();
         $(".deleteResearchButton[data-id='" + $(this).data("id") + "']").hide();
     });
 
-    $(".cancelDelete").click(function() {
+    $(".cancelDelete").click(function () {
         $(".delete_research[data-id='" + $(this).data("id") + "']").hide();
         $(".deleteResearchButton[data-id='" + $(this).data("id") + "']").show();
     });
@@ -112,29 +117,29 @@ $(document).ready(function() {
 
 
 
-    $("#openNavbar").click(function() {
+    $("#openNavbar").click(function () {
         if (navBarOpen) {
-            $(".nav_box").animate({left: '-30%'}, { queue: false }, 300);
-            $(".open_navbar").animate({opacity: '1'}, { queue: false }, 100);
-            $(".collapse_navbar").animate({opacity: '0'}, { queue: false }, 100);
-            $(".open_navbar").animate({rotate: '0deg'}, { queue: false }, 100);
-            $(".collapse_navbar").animate({rotate: '0deg'}, { queue: false }, 100);
+            $(".nav_box").animate({ left: '-30%' }, { queue: false }, 300);
+            $(".open_navbar").animate({ opacity: '1' }, { queue: false }, 100);
+            $(".collapse_navbar").animate({ opacity: '0' }, { queue: false }, 100);
+            $(".open_navbar").animate({ rotate: '0deg' }, { queue: false }, 100);
+            $(".collapse_navbar").animate({ rotate: '0deg' }, { queue: false }, 100);
             navBarOpen = false;
         }
 
         else {
-            $(".nav_box").animate({left: '0%'}, { queue: false }, 300);
-            $(".open_navbar").animate({opacity: '0'}, { queue: false }, 100);
-            $(".collapse_navbar").animate({opacity: '1'}, { queue: false }, 100);
-            $(".open_navbar").animate({rotate: '180deg'}, { queue: false }, 100);
-            $(".collapse_navbar").animate({rotate: '180deg'}, { queue: false }, 100);
+            $(".nav_box").animate({ left: '0%' }, { queue: false }, 300);
+            $(".open_navbar").animate({ opacity: '0' }, { queue: false }, 100);
+            $(".collapse_navbar").animate({ opacity: '1' }, { queue: false }, 100);
+            $(".open_navbar").animate({ rotate: '180deg' }, { queue: false }, 100);
+            $(".collapse_navbar").animate({ rotate: '180deg' }, { queue: false }, 100);
             navBarOpen = true;
         };
-        
+
     });
 
 
-    $("#searchTitle, #searchOrganisation, #searchType, #searchDate").on("input", filterResearchList); 
+    $("#searchTitle, #searchOrganisation, #searchType, #searchDate").on("input", filterResearchList);
     $("#searchUser, #searchResearch, #searchStatus").on("input", filterApproveResearchRequestList);
     $("#searchApproveTitle, #searchApproveOrganisation").on("input", filterApproveResearchList);
     $("#searchUserType, #searchFirstName, #searchLastName, #searchEmail, #searchPhoneNumber").on("input", filterUserList);
@@ -145,9 +150,9 @@ $(document).ready(function() {
         let filterOrganisation = $("#searchOrganisation").val().toLowerCase();
         let filterType = $("#searchType").val().toLowerCase();
         let searchDate = $("#searchDate").val() ? new Date($("#searchDate").val()) : null;
-        
 
-        $("#researchList .col-4").each(function() {
+
+        $("#researchList .col-4").each(function () {
             let title = $(this).data("title").toString().toLowerCase();
             let organisation = $(this).data("organisation").toString().toLowerCase();
             let type = $(this).data("type").toString().toLowerCase();
@@ -155,7 +160,7 @@ $(document).ready(function() {
             let availableUntil = new Date($(this).data("availableUntil"));
             let showItem = title.includes(filterTitle) && organisation.includes(filterOrganisation) && type.includes(filterType);
             console.log(filterType, type)
-            if (searchDate !=null) {
+            if (searchDate != null) {
                 showItem = showItem && searchDate >= availableFrom && searchDate <= availableUntil;
             }
 
@@ -170,7 +175,7 @@ $(document).ready(function() {
         let filterResearch = $("#searchResearch").val().toLowerCase();
         let filterStatus = $("#searchStatus").val().toLowerCase();
 
-        $("#approveResearchRequestList .col-4").each(function() {
+        $("#approveResearchRequestList .col-4").each(function () {
             let user = $(this).data("user").toString().toLowerCase();
             let research = $(this).data("research").toString().toLowerCase();
             let status = $(this).data("status").toString().toLowerCase();
@@ -184,7 +189,7 @@ $(document).ready(function() {
         let filterApproveTitle = $("#searchApproveTitle").val().toLowerCase();
         let filterApproveOrganisation = $("#searchApproveOrganisation").val().toLowerCase();
 
-        $("#approveResearchList li").each(function() {
+        $("#approveResearchList li").each(function () {
             let title = $(this).data("title").toString().toLowerCase();
             let organisation = $(this).data("organisation").toString().toLowerCase();
             let showItem = title.includes(filterApproveTitle) && organisation.includes(filterApproveOrganisation);
@@ -201,7 +206,7 @@ $(document).ready(function() {
         let filterEmail = $("#searchEmail").val().toLowerCase();
         let filterPhoneNumber = $("#searchPhoneNumber").val().toLowerCase();
 
-        $("#userList li").each(function() {
+        $("#userList li").each(function () {
             let userType = $(this).data("userType").toString().toLowerCase();
             let firstName = $(this).data("firstName").toString().toLowerCase();
             let lastName = $(this).data("lastName").toString().toLowerCase();
@@ -213,7 +218,7 @@ $(document).ready(function() {
         });
     }
 
-    $("#clearSearchFields").click(function() {
+    $("#clearSearchFields").click(function () {
         $("#searchTitle, #searchOrganisation, #searchType, #searchDate").val('');
         $('#researchList li').show();
 
@@ -227,10 +232,10 @@ $(document).ready(function() {
         $("#searchUserType, #searchFirstName, #searchLastName, #searchEmail, #searchPhoneNumber").val('');
         $('#userList li').show();
     });
-        
+
 
     function updateCardHeaderColor() {
-        $("div[data-status]").each(function() {
+        $("div[data-status]").each(function () {
             var status = $(this).data("status");
             var cardHeader = $(this).find('.card-header');
             switch (status) {
@@ -250,14 +255,14 @@ $(document).ready(function() {
     }
 
     if (window.location.href === "http://127.0.0.1:5000/register") {
-        document.getElementById('toggleButton').onclick = function() {
+        document.getElementById('toggleButton').onclick = function () {
             console.log('clicked');
-        let hiddenInfo = document.getElementById('hiddenInfo');
-        if (hiddenInfo.style.display === 'none') {
-            hiddenInfo.style.display = 'block';
-        } else {
-            hiddenInfo.style.display = 'none';
-        }
+            let hiddenInfo = document.getElementById('hiddenInfo');
+            if (hiddenInfo.style.display === 'none') {
+                hiddenInfo.style.display = 'block';
+            } else {
+                hiddenInfo.style.display = 'none';
+            }
         };
     };
 

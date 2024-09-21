@@ -1,4 +1,5 @@
 from flask import request, session
+from werkzeug.security import check_password_hash
 import sqlite3
 # from app import db
 
@@ -48,22 +49,22 @@ def UserLogin(data):
     database = sqlite3.connect("database/wp3.db")
     database.row_factory = sqlite3.Row
     cursor = database.cursor()
-    cursor.execute('SELECT * FROM user WHERE mail = ? AND password = ? ',
-                   (f"{data['mail']}", f"{data['password']}"))
+    cursor.execute('SELECT * FROM user WHERE mail = ?',
+                   (f"{data['mail']}",))
     user = cursor.fetchone()
     database.close()
-    # print("user: ")
-    # print(user)
+
     if user is None:
         return None
     else:
-        session['user_id'] = user['id']
-        session['firstname'] = user['firstname']
-        session['mail'] = user['mail']
-        session['is_approved'] = user['is_approved']
-
-    # print("session: ")
-    # print(session)
+        hashed_password = user['password']
+        if check_password_hash(hashed_password, data['password']):
+            session['user_id'] = user['id']
+            session['firstname'] = user['firstname']
+            session['mail'] = user['mail']
+            session['is_approved'] = user['is_approved']
+        else:
+            return None
 
     return user
 

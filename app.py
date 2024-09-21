@@ -5,10 +5,22 @@ from routes.api import api
 from routes.auth import auth
 from routes.inquiry import inquiry
 import os
+from dotenv import load_dotenv
+from flask_wtf.csrf import CSRFProtect
+
+
 file_path = os.path.abspath(os.getcwd())+"/database/wp3.db"
 
 app = Flask(__name__, template_folder='templates')
-app.secret_key = 'wp3'
+
+load_dotenv(dotenv_path="secretKey.env")
+SECRET_KEY = os.getenv("ENV_SECRET_KEY")
+app.secret_key = SECRET_KEY
+
+#csrf = CSRFProtect(app) # beveiligd de app tegen CSRF aanvallen
+
+
+
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + file_path  # Use your SQLite database file path
 db.init_app(app)
 
